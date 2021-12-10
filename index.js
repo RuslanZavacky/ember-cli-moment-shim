@@ -11,6 +11,7 @@ const stew = require('broccoli-stew');
 const chalk = require('chalk');
 const path = require('path');
 const fs = require('fs');
+const cacheKeyForTree = require('calculate-cache-key-for-tree');
 
 const rename = stew.rename;
 const map = stew.map;
@@ -191,5 +192,9 @@ module.exports = {
       mergeTrees(trees),
       content => `if (typeof FastBoot === 'undefined') { ${content} }`
     );
-  }
+  },
+
+  cacheKeyForTree(treeType) {
+    return cacheKeyForTree(treeType, this);
+  },
 };
